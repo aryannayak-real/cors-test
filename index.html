@@ -10,7 +10,9 @@ async function test() {
   try {
     const r = await fetch("https://api.asurascans.com/api/me/account", {
       method: "GET",
-      credentials: "include"
+      headers: {
+        "Authorization": "Bearer TEST_ONLY_INVALID_TOKEN"
+      }
     });
 
     const text = await r.text();
