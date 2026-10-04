@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<body>
+<h2>CORS test</h2>
+<button onclick="test()">Test API</button>
+<pre id="out"></pre>
+
+<script>
+async function test() {
+  try {
+    const r = await fetch("https://api.asurascans.com/api/me/account", {
+      method: "GET",
+      credentials: "include"
+    });
+
+    const text = await r.text();
+
+    document.getElementById("out").textContent =
+      "HTTP " + r.status + "\n\n" + text;
+  } catch (e) {
+    document.getElementById("out").textContent =
+      "Browser error: " + e;
+  }
+}
+</script>
+</body>
+</html>
