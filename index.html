@@ -1,29 +1,39 @@
 <!doctype html>
 <html>
 <body>
-<h2>CORS test</h2>
+
+<h2>CORS Test</h2>
+
 <button onclick="test()">Test API</button>
-<pre id="out"></pre>
+
+<pre id="out">Waiting...</pre>
 
 <script>
 async function test() {
+  document.getElementById("out").textContent = "Testing...";
+
   try {
-    const r = await fetch("https://api.asurascans.com/api/me/account", {
-      method: "GET",
-      headers: {
-        "Authorization": "Bearer TEST_ONLY_INVALID_TOKEN"
+    const response = await fetch(
+      "https://api.asurascans.com/api/me/account",
+      {
+        method: "GET",
+        headers: {
+          "Authorization": "Bearer TEST_ONLY_INVALID_TOKEN"
+        }
       }
-    });
+    );
 
-    const text = await r.text();
+    const body = await response.text();
 
     document.getElementById("out").textContent =
-      "HTTP " + r.status + "\n\n" + text;
-  } catch (e) {
+      "HTTP " + response.status + "\n\n" + body;
+
+  } catch (error) {
     document.getElementById("out").textContent =
-      "Browser error: " + e;
+      "Browser error: " + error;
   }
 }
 </script>
+
 </body>
 </html>
